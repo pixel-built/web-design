@@ -198,13 +198,13 @@ a{color:inherit}
 
 
 /* PixelBuilt first-entry loader — matching heading gold */
-.pb-loader{position:fixed;inset:0;z-index:9999;background:#0c0c0c;display:grid;place-items:center;transition:opacity .55s ease,visibility .55s ease}
+.pb-loader{position:fixed;inset:0;z-index:9999;background:#C99B54;display:grid;place-items:center;transition:opacity .55s ease,visibility .55s ease}
 .pb-loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
 .pb-loader-inner{width:min(280px,75vw);text-align:center}
 .pb-loader-name{color:#C99B54;font-size:clamp(24px,5vw,35px);font-weight:750;letter-spacing:.24em;line-height:1.2}
 .pb-loader-caption{color:#a59a8b;font-size:9px;letter-spacing:.32em;margin-top:12px}
-.pb-loader-track{height:2px;background:#2b251e;margin-top:28px;overflow:hidden}
-.pb-loader-bar{display:block;height:100%;width:0;background:#C99B54;animation:pb-load 1.05s cubic-bezier(.2,.7,.2,1) forwards}
+.pb-loader-track{height:2px;background:rgba(12,12,12,.20);margin-top:28px;overflow:hidden}
+.pb-loader-bar{display:block;height:100%;width:0;background:#0C0C0C;animation:pb-load 1.05s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes pb-load{to{width:100%}}
 @media(prefers-reduced-motion:reduce){.pb-loader-bar{animation:none;width:100%}.pb-loader{transition:none}}
 
