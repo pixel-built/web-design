@@ -85,6 +85,21 @@ a{color:inherit}
 .transition.out i{transform-origin:top;transform:scaleY(0)}
 .transition i:nth-child(2){transition-delay:.025s}.transition i:nth-child(3){transition-delay:.05s}.transition i:nth-child(4){transition-delay:.075s}.transition i:nth-child(5){transition-delay:.1s}.transition i:nth-child(6){transition-delay:.125s}.transition i:nth-child(7){transition-delay:.15s}.transition i:nth-child(8){transition-delay:.175s}.transition i:nth-child(9){transition-delay:.2s}.transition i:nth-child(10){transition-delay:.225s}.transition i:nth-child(11){transition-delay:.25s}.transition i:nth-child(12){transition-delay:.275s}
 
+/* Brand appears only while the gold panels cover the viewport. */
+.transition .pb-page-transition-logo{position:absolute;left:50%;top:50%;width:min(340px,78vw);max-height:190px;height:auto;object-fit:contain;transform:translate(-50%,-50%);opacity:0;visibility:hidden;z-index:2;pointer-events:none;transition:none}
+/* Outgoing: wait until the gold panels are fully raised before showing the logo. */
+.transition.go:not(.arriving) .pb-page-transition-logo{animation:pb-logo-outgoing .22s linear .40s both;visibility:visible}
+@keyframes pb-logo-outgoing{0%,1%{opacity:0}2%,100%{opacity:1}}
+/* Incoming: logo is fully visible over solid gold, then vanishes BEFORE panels retract. */
+.transition.arriving{opacity:1}
+.transition.arriving i{transform:scaleY(1);transition:none}
+.transition.arriving .pb-page-transition-logo{opacity:1;visibility:visible}
+.transition.arriving.out i{transform-origin:top;transform:scaleY(0);transition:transform .42s var(--ease2)}
+.transition.arriving.out .pb-page-transition-logo{opacity:0;visibility:hidden}
+@media(prefers-reduced-motion:reduce){.transition .pb-page-transition-logo{animation:none!important}}
+
+.nav .start-btn::after,.nav .start-btn:hover::after,.nav .start-btn.active::after{content:none!important;display:none!important}
+
 /* ---------- HOME ---------- */
 .home{background:var(--ivory)}
 .home-inner{min-height:calc(100svh - var(--header));display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(38px,6vw,92px);align-items:center;padding:48px 0}
@@ -262,7 +277,7 @@ a{color:inherit}
 .pb-loading-logo{display:block;width:auto;max-width:min(250px,70vw);height:auto;max-height:120px;margin:0 auto;object-fit:contain}
 .pb-footer-logo{display:block;width:auto;max-width:160px;height:auto;max-height:48px;object-fit:contain;object-position:left center}
 @media(max-width:600px){.pb-header-logo{max-width:145px;max-height:44px}.pb-footer-logo{max-width:140px}}
-</style><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pixelbuilt.co/#organization","name":"PixelBuilt","url":"https://pixelbuilt.co/","email":"sales@pixelbuilt.co","telephone":"+60164597994","sameAs":["https://www.facebook.com/pixelbuilt/","https://www.instagram.com/pixelbuilt1/"],"description":"Custom web design studio serving businesses internationally.","parentOrganization":{"@type":"Organization","name":"Plannique Design Co."}},{"@type":"WebSite","@id":"https://pixelbuilt.co/#website","name":"PixelBuilt","url":"https://pixelbuilt.co/","publisher":{"@id":"https://pixelbuilt.co/#organization"},"inLanguage":"en","description":"Custom website design and website redesign for small businesses."},{"@type":"WebPage","@id":"https://pixelbuilt.co/#webpage","name":"Small Business Web Design & Custom Websites | PixelBuilt","url":"https://pixelbuilt.co/","description":"PixelBuilt creates custom, mobile-friendly websites for small businesses in the US and worldwide. Explore web design and redesign packages starting at $599 USD.","isPartOf":{"@id":"https://pixelbuilt.co/#website"},"about":{"@id":"https://pixelbuilt.co/#organization"},"inLanguage":"en","primaryImageOfPage":{"@type":"ImageObject","url":"https://pixelbuilt.co/assets/desktop.png"}},{"@type":"Service","@id":"https://pixelbuilt.co/#web-design-service","name":"Custom Small Business Web Design","serviceType":"Website design and website redesign","description":"Responsive custom websites, landing pages, and website redesign services for small businesses.","provider":{"@id":"https://pixelbuilt.co/#organization"},"areaServed":{"@type":"Place","name":"Worldwide"},"url":"https://pixelbuilt.co/services/","offers":{"@type":"Offer","price":"599","priceCurrency":"USD","description":"Starting price for the Essential website design package","url":"https://pixelbuilt.co/pricing/"}}]}</script></head><body data-current-page="home"><div aria-label="Loading PixelBuilt" class="pb-loader" id="pbLoader" role="status"><div class="pb-loader-inner"><img class="pb-loading-logo" src="assets/logo-loading.png" alt="PixelBuilt" width="220" height="90"><div class="pb-loader-track"><span class="pb-loader-bar"></span></div></div></div><div class="app"><header class="header">
+</style><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pixelbuilt.co/#organization","name":"PixelBuilt","url":"https://pixelbuilt.co/","email":"sales@pixelbuilt.co","telephone":"+60164597994","sameAs":["https://www.facebook.com/pixelbuilt/","https://www.instagram.com/pixelbuilt1/"],"description":"Custom web design studio serving businesses internationally.","parentOrganization":{"@type":"Organization","name":"Plannique Design Co."}},{"@type":"WebSite","@id":"https://pixelbuilt.co/#website","name":"PixelBuilt","url":"https://pixelbuilt.co/","publisher":{"@id":"https://pixelbuilt.co/#organization"},"inLanguage":"en","description":"Custom website design and website redesign for small businesses."},{"@type":"WebPage","@id":"https://pixelbuilt.co/#webpage","name":"Small Business Web Design & Custom Websites | PixelBuilt","url":"https://pixelbuilt.co/","description":"PixelBuilt creates custom, mobile-friendly websites for small businesses in the US and worldwide. Explore web design and redesign packages starting at $599 USD.","isPartOf":{"@id":"https://pixelbuilt.co/#website"},"about":{"@id":"https://pixelbuilt.co/#organization"},"inLanguage":"en","primaryImageOfPage":{"@type":"ImageObject","url":"https://pixelbuilt.co/assets/desktop.png"}},{"@type":"Service","@id":"https://pixelbuilt.co/#web-design-service","name":"Custom Small Business Web Design","serviceType":"Website design and website redesign","description":"Responsive custom websites, landing pages, and website redesign services for small businesses.","provider":{"@id":"https://pixelbuilt.co/#organization"},"areaServed":{"@type":"Place","name":"Worldwide"},"url":"https://pixelbuilt.co/services/","offers":{"@type":"Offer","price":"599","priceCurrency":"USD","description":"Starting price for the Essential website design package","url":"https://pixelbuilt.co/pricing/"}}]}</script></head><body data-current-page="home"><div class="app"><header class="header">
 <button aria-label="PixelBuilt home" class="brand" data-route="home"><img class="pb-header-logo" src="assets/logo-header.png" alt="PixelBuilt" width="180" height="48" decoding="async"></button>
 <nav aria-label="Main navigation" class="nav">
 <button data-route="services">Services</button>
@@ -310,20 +325,33 @@ a{color:inherit}
 </div>
 </div>
 <footer class="site-footer" aria-label="Website footer"><div class="footer-inner"><div class="pb-footer-identity"><img class="pb-footer-logo" src="assets/logo-header.png" alt="PixelBuilt" width="155" height="42" loading="lazy" decoding="async"></div><div class="pb-footer-links"><a href="mailto:sales@pixelbuilt.co">sales@pixelbuilt.co</a><div class="pb-socials" aria-label="Social media and contact"><a class="pb-social" href="https://www.facebook.com/pixelbuilt/" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.6 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4v3.2h2.8V21h3.4Z"/></svg></a><a class="pb-social" href="https://www.instagram.com/pixelbuilt1/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg></a><a class="pb-social" href="mailto:sales@pixelbuilt.co" aria-label="Email PixelBuilt" title="Email PixelBuilt" ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7 8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="pb-social" href="https://wa.me/60164597994" aria-label="WhatsApp PixelBuilt" title="WhatsApp PixelBuilt" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.7 7.4L3 20.6l1.5-4.6A8.5 8.5 0 1 1 20.5 11.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.2 8.5c-.4.5-.6 1-.4 1.7.4 2 2.4 4.2 4.5 5.1 1.1.5 2.1.5 2.7-.1l.9-1.1-2.4-1.2-.8 1c-1.4-.5-2.7-1.8-3.3-3.2l.9-.9-1.2-2.2Z" fill="currentColor"/></svg></a></div></div><p>PixelBuilt is operated by <strong>Plannique Design Co.</strong></p><small>© <span class="copyright-year">2026</span> PixelBuilt. All rights reserved.</small></div></footer>
-</section></main></div><div class="mobile-menu" id="mobileMenu"><button data-route="home">Home</button><button data-route="services">Services</button><button data-route="process">Process</button><button data-route="pricing">Pricing</button><button data-route="contact">Start a project ↗</button></div><div aria-hidden="true" class="transition" id="transition"></div><script>
+</section></main></div><div class="mobile-menu" id="mobileMenu"><button data-route="home">Home</button><button data-route="services">Services</button><button data-route="process">Process</button><button data-route="pricing">Pricing</button><button data-route="contact">Start a project ↗</button></div><div aria-hidden="true" class="transition" id="transition"><img class="pb-page-transition-logo" src="assets/logo-page-loading.png" alt="" decoding="sync" fetchpriority="high"></div><script>
 (()=>{
 const current=document.body.dataset.currentPage;
 const root=new URL(document.baseURI).pathname;
 const urls={home:root,services:root+'services/',process:root+'process/',pricing:root+'pricing/',contact:root+'contact/'};
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const loader=document.getElementById('pbLoader');
-if(loader){if(current!=='home'||sessionStorage.getItem('pbLoaded')==='1'){loader.remove()}else{sessionStorage.setItem('pbLoaded','1');setTimeout(()=>{loader.classList.add('is-done');setTimeout(()=>loader.remove(),600)},reduce?100:1150)}}
 const menu=document.getElementById('mobileMenu'),menuBtn=document.getElementById('menuBtn');
 menuBtn?.addEventListener('click',()=>{const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menuBtn.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open))});
 document.querySelectorAll('[data-route]').forEach(el=>{const page=el.dataset.route;el.setAttribute('aria-label',el.getAttribute('aria-label')||('Go to '+page));if(el.closest('.nav')&&page===current)el.classList.add('active');el.addEventListener('click',e=>{e.preventDefault();navigate(page)})});
-const wipe=document.getElementById('transition');wipe.innerHTML='<i></i>'.repeat(12);let leaving=false;
-function navigate(page){if(!urls[page]||leaving)return;if(page===current){menu?.classList.remove('open');menuBtn?.classList.remove('open');document.querySelector('.stage')?.scrollTo({top:0,behavior:'smooth'});return}leaving=true;if(reduce){location.href=urls[page];return}wipe.classList.remove('out');wipe.classList.add('go');setTimeout(()=>location.href=urls[page],620)}
-window.addEventListener('pageshow',()=>{wipe.classList.remove('go','out')});
+const wipe=document.getElementById('transition');wipe.insertAdjacentHTML('afterbegin','<i></i>'.repeat(12));let leaving=false;
+let arrivalTimer;
+function revealPage(){
+  clearTimeout(arrivalTimer);
+  if(reduce){wipe.classList.remove('go','out','arriving');return}
+  wipe.classList.remove('go','out','finishing');
+  wipe.classList.add('arriving');
+  // Allow the full gold screen and centered logo to be seen before the original panels retract.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    arrivalTimer=setTimeout(()=>{
+      wipe.classList.add('out');
+      arrivalTimer=setTimeout(()=>{wipe.classList.remove('arriving','out','finishing');},560);
+    },120);
+  }));
+}
+revealPage();
+function navigate(page){if(!urls[page]||leaving)return;if(page===current){menu?.classList.remove('open');menuBtn?.classList.remove('open');document.querySelector('.stage')?.scrollTo({top:0,behavior:'smooth'});return}leaving=true;clearTimeout(arrivalTimer);wipe.classList.remove('arriving','finishing');if(reduce){location.href=urls[page];return}wipe.classList.remove('out');wipe.classList.add('go');setTimeout(()=>location.href=urls[page],620)}
+window.addEventListener('pageshow',event=>{if(event.persisted)revealPage()});
 document.querySelectorAll('.copyright-year').forEach(el=>el.textContent=new Date().getFullYear());
 
 const engine=document.getElementById('engineShell'),tabs=[...document.querySelectorAll('[data-device]')],panels=[...document.querySelectorAll('[data-device-panel]')];
