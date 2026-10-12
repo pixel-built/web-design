@@ -88,10 +88,17 @@ a{color:inherit}
 .transition i:nth-child(2){transition-delay:.025s}.transition i:nth-child(3){transition-delay:.05s}.transition i:nth-child(4){transition-delay:.075s}.transition i:nth-child(5){transition-delay:.1s}.transition i:nth-child(6){transition-delay:.125s}.transition i:nth-child(7){transition-delay:.15s}.transition i:nth-child(8){transition-delay:.175s}.transition i:nth-child(9){transition-delay:.2s}.transition i:nth-child(10){transition-delay:.225s}.transition i:nth-child(11){transition-delay:.25s}.transition i:nth-child(12){transition-delay:.275s}
 
 /* Centered brand logo over the existing gold page-wipe animation. */
-.transition .pb-page-transition-logo{position:absolute;left:50%;top:50%;width:min(240px,65vw);max-height:130px;height:auto;object-fit:contain;transform:translate(-50%,-45%) scale(.96);opacity:0;z-index:2;pointer-events:none;transition:opacity .2s ease .28s,transform .3s ease .28s}
+.transition .pb-page-transition-logo{position:absolute;left:50%;top:50%;width:min(340px,78vw);max-height:190px;height:auto;object-fit:contain;transform:translate(-50%,-45%) scale(.96);opacity:0;z-index:2;pointer-events:none;transition:opacity .2s ease .28s,transform .3s ease .28s}
 .transition.go .pb-page-transition-logo{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .transition.out .pb-page-transition-logo{opacity:0;transition-delay:0s}
 @media(prefers-reduced-motion:reduce){.transition .pb-page-transition-logo{transition:none}}
+/* Arrival: reveal each page through the same gold-panel transition, with logo. */
+.transition.arriving{opacity:1}
+.transition.arriving i{transform:scaleY(1);transition:none}
+.transition.arriving .pb-page-transition-logo{opacity:1;transform:translate(-50%,-50%) scale(1);transition:none}
+.transition.arriving.out i{transform-origin:top;transform:scaleY(0);transition:transform .42s var(--ease2)}
+.transition.arriving.out .pb-page-transition-logo{opacity:0;transition:opacity .2s ease .16s}
+
 
 /* ---------- HOME ---------- */
 .home{background:var(--ivory)}
@@ -327,8 +334,23 @@ const menu=document.getElementById('mobileMenu'),menuBtn=document.getElementById
 menuBtn?.addEventListener('click',()=>{const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menuBtn.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open))});
 document.querySelectorAll('[data-route]').forEach(el=>{const page=el.dataset.route;el.setAttribute('aria-label',el.getAttribute('aria-label')||('Go to '+page));if(el.closest('.nav')&&page===current)el.classList.add('active');el.addEventListener('click',e=>{e.preventDefault();navigate(page)})});
 const wipe=document.getElementById('transition');wipe.insertAdjacentHTML('afterbegin','<i></i>'.repeat(12));let leaving=false;
-function navigate(page){if(!urls[page]||leaving)return;if(page===current){menu?.classList.remove('open');menuBtn?.classList.remove('open');document.querySelector('.stage')?.scrollTo({top:0,behavior:'smooth'});return}leaving=true;if(reduce){location.href=urls[page];return}wipe.classList.remove('out');wipe.classList.add('go');setTimeout(()=>location.href=urls[page],620)}
-window.addEventListener('pageshow',()=>{wipe.classList.remove('go','out')});
+let arrivalTimer;
+function revealPage(){
+  clearTimeout(arrivalTimer);
+  if(reduce){wipe.classList.remove('go','out','arriving');return}
+  wipe.classList.remove('go','out');
+  wipe.classList.add('arriving');
+  // Allow the full gold screen and centered logo to be seen before the original panels retract.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    arrivalTimer=setTimeout(()=>{
+      wipe.classList.add('out');
+      arrivalTimer=setTimeout(()=>wipe.classList.remove('arriving','out'),800);
+    },380);
+  }));
+}
+revealPage();
+function navigate(page){if(!urls[page]||leaving)return;if(page===current){menu?.classList.remove('open');menuBtn?.classList.remove('open');document.querySelector('.stage')?.scrollTo({top:0,behavior:'smooth'});return}leaving=true;clearTimeout(arrivalTimer);wipe.classList.remove('arriving');if(reduce){location.href=urls[page];return}wipe.classList.remove('out');wipe.classList.add('go');setTimeout(()=>location.href=urls[page],620)}
+window.addEventListener('pageshow',event=>{if(event.persisted)revealPage()});
 document.querySelectorAll('.copyright-year').forEach(el=>el.textContent=new Date().getFullYear());
 
 let step=0,need='',pkg=sessionStorage.getItem('pixelbuiltPackage')||'';sessionStorage.removeItem('pixelbuiltPackage');
