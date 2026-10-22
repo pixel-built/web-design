@@ -289,9 +289,22 @@ a{color:inherit}
 .pb-loading-logo{display:block;width:auto;max-width:min(250px,70vw);height:auto;max-height:120px;margin:0 auto;object-fit:contain}
 .pb-footer-logo{display:block;width:auto;max-width:160px;height:auto;max-height:48px;object-fit:contain;object-position:left center}
 @media(max-width:600px){.pb-header-logo{max-width:145px;max-height:44px}.pb-footer-logo{max-width:140px}}
+
+/* PixelBuilt unified shell refresh: a warm frame around each page. */
+.header{background:#e9e1d4;border-bottom:1px solid #d3c7b6;backdrop-filter:none}
+.site-footer,.services .site-footer,.contact .site-footer{background:#e9e1d4;color:#5f584e;border-top:1px solid #d3c7b6}
+.footer-inner>div strong,.services .footer-inner>div strong,.contact .footer-inner>div strong{color:#171512}
+.nav .start-btn::after,.nav .start-btn:hover::after,.nav .start-btn.active::after{content:none!important;display:none!important}
+/* Accessible, recognizable WhatsApp contact shortcut on every page. */
+.pb-whatsapp-float{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));z-index:85;width:56px;height:56px;display:grid;place-items:center;background:#25D366;color:#fff;border-radius:16px;box-shadow:0 8px 26px rgba(0,0,0,.2);transition:transform .2s ease,box-shadow .2s ease;text-decoration:none}
+.pb-whatsapp-float:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.26)}
+.pb-whatsapp-float:focus-visible{outline:3px solid #111;outline-offset:4px}
+.pb-whatsapp-float svg{width:31px;height:31px;display:block}
+@media(max-width:720px){.pb-whatsapp-float{right:16px;bottom:max(16px,env(safe-area-inset-bottom));width:52px;height:52px;border-radius:15px}.pb-whatsapp-float svg{width:29px;height:29px}}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pixelbuilt.co/#organization","name":"PixelBuilt","url":"https://pixelbuilt.co/","email":"sales@pixelbuilt.co","telephone":"+60164597994","sameAs":["https://www.facebook.com/pixelbuilt/","https://www.instagram.com/pixelbuilt1/"],"parentOrganization":{"@type":"Organization","name":"Plannique Design Co."}},{"@type":"WebSite","@id":"https://pixelbuilt.co/#website","name":"PixelBuilt","url":"https://pixelbuilt.co/","publisher":{"@id":"https://pixelbuilt.co/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://pixelbuilt.co/pricing/#webpage","name":"Website Design Packages & Pricing from $599 | PixelBuilt","url":"https://pixelbuilt.co/pricing/","description":"Compare PixelBuilt website design packages: Essential at $599 USD and Signature at $1,499 USD. Responsive, custom websites for small businesses.","isPartOf":{"@id":"https://pixelbuilt.co/#website"},"about":{"@id":"https://pixelbuilt.co/#organization"},"breadcrumb":{"@id":"https://pixelbuilt.co/pricing/#breadcrumb"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://pixelbuilt.co/pricing/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pixelbuilt.co/"},{"@type":"ListItem","position":2,"name":"Pricing","item":"https://pixelbuilt.co/pricing/"}]},{"@type":"Service","@id":"https://pixelbuilt.co/#webdesignservice","name":"Custom Website Design","serviceType":"Website design","provider":{"@id":"https://pixelbuilt.co/#organization"},"url":"https://pixelbuilt.co/services/","hasOfferCatalog":{"@type":"OfferCatalog","name":"Website design packages","itemListElement":[{"@type":"Offer","name":"Essential website design package","price":"599","priceCurrency":"USD","url":"https://pixelbuilt.co/pricing/","itemOffered":{"@type":"Service","name":"Essential one-page business website design"}},{"@type":"Offer","name":"Signature website design package","price":"1499","priceCurrency":"USD","url":"https://pixelbuilt.co/pricing/","itemOffered":{"@type":"Service","name":"Signature multi-page business website design"}}]}}]}</script></head><body data-current-page="pricing"><div class="app"><header class="header">
 <button aria-label="PixelBuilt home" class="brand" data-route="home"><img class="pb-header-logo" src="assets/logo-header.png" alt="PixelBuilt" width="180" height="48" decoding="async"></button>
 <nav aria-label="Main navigation" class="nav">
+<button data-route="home">Home</button>
 <button data-route="services">Services</button>
 <button data-route="process">Process</button>
 <button data-route="pricing">Pricing</button>
@@ -346,4 +359,15 @@ document.querySelectorAll('.copyright-year').forEach(el=>el.textContent=new Date
 const switches=[...document.querySelectorAll('[data-package]')],cards=[...document.querySelectorAll('.package-card')];switches.forEach((b,i)=>b.addEventListener('click',()=>{switches.forEach((x,n)=>x.classList.toggle('active',n===i));cards.forEach((x,n)=>x.classList.toggle('active',n===i))}));
 document.querySelectorAll('[data-package-choice]').forEach(b=>b.addEventListener('click',()=>{sessionStorage.setItem('pixelbuiltPackage',b.dataset.packageChoice);navigate('contact')}));
 
-})();</script></body></html>
+})();</script><a class="pb-whatsapp-float" href="https://wa.me/60164597994?text=Hi%20PixelBuilt%2C%20I%27d%20like%20to%20enquire%20about%20a%20website." target="_blank" rel="noopener noreferrer" aria-label="Chat with PixelBuilt on WhatsApp" title="Chat with us on WhatsApp" data-track-whatsapp="floating">
+<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16 .8C7.62.8.8 7.62.8 16c0 2.67.7 5.27 2.03 7.56L.7 31.3l7.95-2.08A15.13 15.13 0 0 0 16 31.2c8.38 0 15.2-6.82 15.2-15.2S24.38.8 16 .8Zm0 27.82a12.56 12.56 0 0 1-6.41-1.75l-.46-.27-4.72 1.24 1.26-4.6-.3-.47A12.55 12.55 0 0 1 3.44 16C3.44 9.08 9.08 3.44 16 3.44S28.56 9.08 28.56 16 22.92 28.62 16 28.62Zm6.89-9.44c-.38-.19-2.23-1.1-2.57-1.23-.35-.12-.6-.19-.85.19-.25.38-.97 1.23-1.19 1.48-.22.25-.44.28-.82.09-.38-.19-1.59-.59-3.03-1.88-1.12-1-1.87-2.24-2.09-2.62-.22-.38-.02-.58.17-.77.17-.17.38-.44.57-.66.19-.22.25-.38.38-.63.12-.25.06-.47-.03-.66-.09-.19-.85-2.04-1.16-2.8-.31-.73-.62-.63-.85-.64h-.73c-.25 0-.66.09-1.01.47-.35.38-1.32 1.29-1.32 3.14s1.35 3.65 1.54 3.9c.19.25 2.66 4.07 6.45 5.71.9.39 1.61.62 2.16.79.91.29 1.74.25 2.4.15.73-.11 2.23-.91 2.54-1.79.32-.88.32-1.63.22-1.79-.09-.16-.34-.25-.72-.44Z"/></svg></a>
+<script>
+/* Track actual WhatsApp button clicks, not merely impressions. */
+document.addEventListener('click',function(event){
+  var link=event.target.closest('a[data-track-whatsapp]');
+  if(link && typeof window.gtag==='function'){
+    window.gtag('event','whatsapp_click',{button_location:link.dataset.trackWhatsapp, page_path:location.pathname});
+  }
+});
+</script>
+</body></html>
