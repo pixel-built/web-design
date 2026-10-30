@@ -343,8 +343,34 @@ p{font-size:clamp(.92rem,1vw,1.03rem);line-height:1.75;letter-spacing:0;max-widt
  .cta-band{padding:42px 0!important}
 }
 @media(prefers-reduced-motion:reduce){#home .motion-gallery{height:auto!important}#home .motion-gallery>.wrap{height:auto!important;max-height:none!important;position:relative!important;top:auto!important;overflow:visible!important}}
-</style></head><body><header class="topbar"><div class="wrap nav"><a aria-label="CHAMBUILD Home" class="logo" href="#home"><img alt="CHAMBUILD — Your Vision, Our Commitment" class="brand-logo" src="chambuild-logo-brand.png"/></a><nav aria-label="Primary navigation" class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#standards">Standards</a><a href="#careers">Careers</a><a href="#contact" class="mobile-quote-link">Get a Quote <span>↗</span></a></nav><a class="btn nav-cta" href="#contact">Get a Quote <span>↗</span></a><button aria-controls="navlinks" aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">☰</button></div></header><main id="main">
-<section aria-label="Home page" class="page active" id="home"><section aria-label="Scroll-controlled CHAMBUILD film" class="film-sequence" id="filmSequence"><div class="film-sticky"><video id="filmVideo" class="film-video" muted playsinline preload="auto" poster="chambuild-video-poster.jpg" aria-label="Architectural film controlled by scrolling"><source src="chambuild-mobile-video.mp4" media="(max-width: 700px)" type="video/mp4"><source src="chambuild-scroll-video.mp4" type="video/mp4"></video><div class="film-shade"></div><div class="film-copy wrap"><span class="film-kicker">CHAMBUILD / THE GAMBIA</span><h1>Building with<br><em>purpose.</em></h1><p>Construction, engineering and property improvement, thoughtfully delivered.</p><a href="#services" class="btn">Explore our services ↗</a></div></div></section>
+</style><style id="v21-no-gallery-gap">
+/* Natural content height: no sticky scroll spacer after the last gallery card. */
+#home .motion-gallery{height:auto!important;min-height:0!important;padding:clamp(30px,4vw,58px) 0 clamp(22px,3vw,42px)!important;overflow:hidden!important}
+#home .motion-gallery>.wrap{position:relative!important;top:auto!important;height:auto!important;max-height:none!important;min-height:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding:0!important;overflow:visible!important}
+#home .motion-heading{margin-bottom:clamp(14px,2vw,24px)!important}
+#home .motion-track{transition:transform .48s cubic-bezier(.25,1,.5,1)!important}
+#home .motion-progress{margin-top:14px!important}
+#home>.section.alt{padding-top:clamp(24px,3vw,42px)!important}
+#home .motion-controls button:disabled{opacity:.35;cursor:default}
+@media(max-width:600px){#home .motion-gallery{padding:25px 0 20px!important}#home .motion-slide{height:clamp(200px,32svh,280px)!important}#home>.section.alt{padding-top:22px!important}}
+@media(prefers-reduced-motion:reduce){#home .motion-track{transition:none!important}}
+</style><style id="v22-image-edge-fix">
+/* V22: keep photographic panels fully covered throughout scroll.
+   Avoid moving layered CSS backgrounds: on some browsers the drift exposes
+   an edge of the background image, creating a visible duplicate strip. */
+#about .portrait, .feature-image {
+  background-position:center center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+  transform:none !important;
+  isolation:isolate;
+  overflow:hidden;
+  backface-visibility:hidden;
+}
+#about .portrait { background-color:#111417; }
+</style>
+</head><body><header class="topbar"><div class="wrap nav"><a aria-label="CHAMBUILD Home" class="logo" href="#home"><img alt="CHAMBUILD — Your Vision, Our Commitment" class="brand-logo" src="chambuild-logo-brand.png"/></a><nav aria-label="Primary navigation" class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#standards">Standards</a><a href="#careers">Careers</a><a href="#contact" class="mobile-quote-link">Get a Quote <span>↗</span></a></nav><a class="btn nav-cta" href="#contact">Get a Quote <span>↗</span></a><button aria-controls="navlinks" aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">☰</button></div></header><main id="main">
+<section aria-label="Home page" class="page active" id="home"><section aria-label="Scroll-controlled CHAMBUILD film" class="film-sequence" id="filmSequence"><div class="film-sticky"><video id="filmVideo" class="film-video" muted playsinline preload="auto" poster="chambuild-video-poster.jpg" aria-label="Architectural film controlled by scrolling"><source src="chambuild-scroll-video.mp4" type="video/mp4"></video><div class="film-shade"></div><div class="film-copy wrap"><span class="film-kicker">CHAMBUILD / THE GAMBIA</span><h1>Building with<br><em>purpose.</em></h1><p>Construction, engineering and property improvement, thoughtfully delivered.</p><a href="#services" class="btn">Explore our services ↗</a></div></div></section>
 <section aria-label="Explore project perspectives" class="motion-gallery"><div class="wrap"><div class="motion-heading"><div><div class="eyebrow">Inspiration in motion</div><h2>Places with <em>purpose.</em></h2></div><p>Explore the spaces and disciplines shaping our approach. Images are illustrative concepts, not completed CHAMBUILD commissions.</p><div class="motion-controls"><button aria-label="Previous image" id="motionPrev" type="button">←</button><button aria-label="Next image" id="motionNext" type="button">→</button></div></div><div aria-label="Image carousel, use arrow keys" class="motion-viewport" id="motionViewport" tabindex="0"><div class="motion-track" id="motionTrack">
 <article class="motion-slide"><img alt="Contemporary residential interior" loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=1100&amp;q=80"/><div class="motion-slide-content"><span>01 / Residential</span><h3>Designed for living</h3></div></article>
 <article class="motion-slide"><img alt="Modern architectural structure" loading="lazy" src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&amp;fit=crop&amp;w=1100&amp;q=80"/><div class="motion-slide-content"><span>02 / Architecture</span><h3>Form meets function</h3></div></article>
@@ -387,8 +413,7 @@ p{font-size:clamp(.92rem,1vw,1.03rem);line-height:1.75;letter-spacing:0;max-widt
 
 /* Cinematic scroll chapters and auto-advancing gallery */
 (()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const scenes=[];let raf=0;function updateStories(){raf=0;if(reduce||!document.getElementById('home').classList.contains('active'))return;const vh=window.innerHeight;for(const scene of scenes){const r=scene.getBoundingClientRect();if(r.bottom<0||r.top>vh)continue;const range=Math.max(1,r.height-vh);const t=Math.max(0,Math.min(1,-r.top/range));const bg=scene.querySelector('.story-layer');const copy=scene.querySelector('.story-copy');bg.style.transform=`translate3d(0,${(t-.5)*65}px,0) scale(${1.12-t*.1})`;copy.style.transform=`translate3d(0,${(1-t)*32}px,0)`;copy.style.opacity=String(Math.min(1,.65+t*.75));}}window.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(updateStories)},{passive:true});window.addEventListener('resize',updateStories);window.addEventListener('hashchange',()=>requestAnimationFrame(updateStories));updateStories();
-const viewport=document.getElementById('motionViewport'),track=document.getElementById('motionTrack'),slides=[...track.children],progress=document.getElementById('motionProgress');let index=0,interval;function maxIndex(){const slide=slides[0];return Math.max(0,slides.length-Math.max(1,Math.floor((viewport.clientWidth+18)/(slide.getBoundingClientRect().width+18))))}function move(n){index=Math.max(0,Math.min(maxIndex(),n));const step=slides[0].getBoundingClientRect().width+(window.innerWidth<=600?12:18);track.style.transform=`translate3d(${-index*step}px,0,0)`;progress.style.width=`${100/Math.max(1,maxIndex()+1)}%`;progress.style.transform=`translate3d(${index*100}%,0,0)`;}function next(){move(index>=maxIndex()?0:index+1)}function start(){clearInterval(interval);if(!reduce)interval=setInterval(()=>{if(document.visibilityState==='visible'&&document.getElementById('home').classList.contains('active'))next()},4200)}document.getElementById('motionNext').addEventListener('click',()=>{next();start()});document.getElementById('motionPrev').addEventListener('click',()=>{move(index<=0?maxIndex():index-1);start()});viewport.addEventListener('mouseenter',()=>clearInterval(interval));viewport.addEventListener('mouseleave',start);viewport.addEventListener('focusin',()=>clearInterval(interval));viewport.addEventListener('focusout',start);viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();move(index-1)}});let startX=null;viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;clearInterval(interval)},{passive:true});viewport.addEventListener('touchend',e=>{if(startX===null)return;const delta=e.changedTouches[0].clientX-startX;if(Math.abs(delta)>45)move(index+(delta<0?1:-1));startX=null;start()},{passive:true});window.addEventListener('resize',()=>move(index));move(0);start();})();
-
+})();
 /* One continuous pinned visual sequence: scroll advances the imagery, not separate full-screen blocks. */
 (()=>{const run=document.getElementById('cinemaRun');if(!run)return;const frames=[...run.querySelectorAll('.cinema-frame')];const count=document.getElementById('cinemaCount');const meter=document.getElementById('cinemaMeter');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let scheduled=false,last=-1;
 function update(){scheduled=false;if(!document.getElementById('home').classList.contains('active'))return;const rect=run.getBoundingClientRect();const distance=Math.max(1,rect.height-innerHeight);const progress=Math.min(1,Math.max(0,-rect.top/distance));const current=reduced?0:Math.min(frames.length-1,Math.floor(progress*frames.length));if(current!==last){frames.forEach((frame,i)=>{const active=i===current;frame.classList.toggle('is-current',active);frame.setAttribute('aria-hidden',String(!active))});count.textContent=String(current+1).padStart(2,'0')+' / 03';last=current}meter.style.transform='scaleX('+progress+')';if(!reduced){frames[current].querySelector('.cinema-image').style.transform='translate3d(0,'+((progress*frames.length-current)*-18)+'px,0) scale(1.09)'}}
@@ -396,52 +421,36 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}
 </script>
 
 <script>
-/* V7 gallery: normal vertical scroll drives horizontal movement; no wheel interception. */
+/* V21: compact gallery with no artificial scroll-height or empty tail. */
 (()=>{
- const section=document.querySelector('#home .motion-gallery');
  const viewport=document.getElementById('motionViewport');
  const track=document.getElementById('motionTrack');
- const progressBar=document.getElementById('motionProgress');
+ const bar=document.getElementById('motionProgress');
  const prev=document.getElementById('motionPrev');
  const next=document.getElementById('motionNext');
- if(!section||!viewport||!track||!progressBar)return;
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
- const slides=Array.from(track.querySelectorAll('.motion-slide'));
- let maxX=0,travel=1,scheduled=false;
- const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
- function measure(){
-   maxX=Math.max(0,track.scrollWidth-viewport.clientWidth);
-   travel=Math.max(1,section.offsetHeight-section.querySelector('.wrap').offsetHeight-parseFloat(getComputedStyle(section.querySelector('.wrap')).top||0));
-   update();
- }
- function currentProgress(){const stickyTop=parseFloat(getComputedStyle(section.querySelector('.wrap')).top||0);return clamp((stickyTop-section.getBoundingClientRect().top)/travel,0,1)}
+ if(!viewport||!track)return;
+ const slides=[...track.querySelectorAll('.motion-slide')];
+ let index=0, startX=null;
+ function maxIndex(){return Math.max(0,slides.length-1)}
  function update(){
-   scheduled=false;
-   if(reduced.matches)return;
-   if(!document.getElementById('home').classList.contains('active'))return;
-   const p=currentProgress();
-   track.style.transform=`translate3d(${-maxX*p}px,0,0)`;
-   progressBar.style.transform=`scaleX(${p})`;
-   if(prev)prev.disabled=p<=.005;
-   if(next)next.disabled=p>=.995;
+  const first=slides[0];if(!first)return;
+  const gap=parseFloat(getComputedStyle(track).gap)||12;
+  const width=first.getBoundingClientRect().width+gap;
+  const maxShift=Math.max(0,track.scrollWidth-viewport.clientWidth);
+  const shift=Math.min(index*width,maxShift);
+  track.style.transform=`translate3d(${-shift}px,0,0)`;
+  if(bar)bar.style.transform=`scaleX(${maxShift?shift/maxShift:1})`;
+  if(prev)prev.disabled=index===0;
+  if(next)next.disabled=shift>=maxShift-1;
  }
- function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}
- function toSlide(dir){
-   if(reduced.matches){viewport.scrollBy({left:dir*(slides[0]?.getBoundingClientRect().width||300),behavior:'smooth'});return}
-   const p=currentProgress();
-   const step=1/Math.max(1,slides.length-1);
-   const nextP=clamp((dir>0?Math.floor(p/step+.001)+1:Math.ceil(p/step-.001)-1)*step,0,1);
-   const stickyTop=parseFloat(getComputedStyle(section.querySelector('.wrap')).top||0);window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-stickyTop+nextP*travel,behavior:'smooth'});
- }
- prev?.addEventListener('click',()=>toSlide(-1));
- next?.addEventListener('click',()=>toSlide(1));
- viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();toSlide(e.key==='ArrowRight'?1:-1)}});
- window.addEventListener('scroll',schedule,{passive:true});
- window.addEventListener('resize',measure,{passive:true});
- window.addEventListener('hashchange',()=>requestAnimationFrame(measure));
- if('ResizeObserver'in window)new ResizeObserver(measure).observe(viewport);
- reduced.addEventListener?.('change',measure);
- measure();
+ function move(delta){index=Math.max(0,Math.min(maxIndex(),index+delta));update()}
+ prev?.addEventListener('click',()=>move(-1));
+ next?.addEventListener('click',()=>move(1));
+ viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1)}});
+ viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX},{passive:true});
+ viewport.addEventListener('touchend',e=>{if(startX===null)return;const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>35)move(dx<0?1:-1);startX=null},{passive:true});
+ window.addEventListener('resize',update,{passive:true});
+ update();
 })();
 </script>
 
@@ -453,7 +462,7 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}
  const root=document.documentElement;
  let ticking=false,targets=[];
  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
- function collect(){targets=Array.from(document.querySelectorAll('.page.active .page-hero,.page.active .motion-slide,.page.active .project,.page.active .portrait,.page.active .feature-image,.page.active .card')).filter(el=>el.getClientRects().length);schedule()}
+ function collect(){targets=Array.from(document.querySelectorAll('.page.active .page-hero,.page.active .motion-slide,.page.active .project,.page.active .card')).filter(el=>el.getClientRects().length);schedule()}
  function frame(){ticking=false;
    const max=document.documentElement.scrollHeight-innerHeight;
    root.style.setProperty('--reading-progress',max>0?String(clamp(scrollY/max,0,1)):'0');
