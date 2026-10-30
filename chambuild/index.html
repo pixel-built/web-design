@@ -348,7 +348,7 @@ p{font-size:clamp(.92rem,1vw,1.03rem);line-height:1.75;letter-spacing:0;max-widt
 #home .motion-gallery{height:auto!important;min-height:0!important;padding:clamp(30px,4vw,58px) 0 clamp(22px,3vw,42px)!important;overflow:hidden!important}
 #home .motion-gallery>.wrap{position:relative!important;top:auto!important;height:auto!important;max-height:none!important;min-height:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding:0!important;overflow:visible!important}
 #home .motion-heading{margin-bottom:clamp(14px,2vw,24px)!important}
-#home .motion-track{transition:transform .48s cubic-bezier(.25,1,.5,1)!important}
+#home .motion-track{transition:none!important}
 #home .motion-progress{margin-top:14px!important}
 #home>.section.alt{padding-top:clamp(24px,3vw,42px)!important}
 #home .motion-controls button:disabled{opacity:.35;cursor:default}
@@ -421,36 +421,47 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}
 </script>
 
 <script>
-/* V21: compact gallery with no artificial scroll-height or empty tail. */
+/* V23: scroll-driven horizontal gallery, without a tall sticky spacer. */
 (()=>{
+ const gallery=document.querySelector('#home .motion-gallery');
  const viewport=document.getElementById('motionViewport');
  const track=document.getElementById('motionTrack');
  const bar=document.getElementById('motionProgress');
  const prev=document.getElementById('motionPrev');
  const next=document.getElementById('motionNext');
- if(!viewport||!track)return;
+ if(!gallery||!viewport||!track)return;
  const slides=[...track.querySelectorAll('.motion-slide')];
- let index=0, startX=null;
- function maxIndex(){return Math.max(0,slides.length-1)}
- function update(){
-  const first=slides[0];if(!first)return;
-  const gap=parseFloat(getComputedStyle(track).gap)||12;
-  const width=first.getBoundingClientRect().width+gap;
-  const maxShift=Math.max(0,track.scrollWidth-viewport.clientWidth);
-  const shift=Math.min(index*width,maxShift);
-  track.style.transform=`translate3d(${-shift}px,0,0)`;
-  if(bar)bar.style.transform=`scaleX(${maxShift?shift/maxShift:1})`;
-  if(prev)prev.disabled=index===0;
-  if(next)next.disabled=shift>=maxShift-1;
- }
- function move(delta){index=Math.max(0,Math.min(maxIndex(),index+delta));update()}
- prev?.addEventListener('click',()=>move(-1));
- next?.addEventListener('click',()=>move(1));
- viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1)}});
- viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX},{passive:true});
- viewport.addEventListener('touchend',e=>{if(startX===null)return;const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>35)move(dx<0?1:-1);startX=null},{passive:true});
- window.addEventListener('resize',update,{passive:true});
- update();
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let offset=0, raf=0, touchStart=null;
+ const maxShift=()=>Math.max(0,track.scrollWidth-viewport.clientWidth);
+ function render(){raf=0;const max=maxShift();offset=Math.max(0,Math.min(max,offset));track.style.transform=`translate3d(${-offset}px,0,0)`;if(bar)bar.style.transform=`scaleX(${max?offset/max:1})`;if(prev)prev.disabled=offset<=1;if(next)next.disabled=offset>=max-1;}
+ function schedule(){if(!raf)raf=requestAnimationFrame(render)}
+ function moveBy(amount){offset=Math.max(0,Math.min(maxShift(),offset+amount));schedule()}
+ function step(dir){const slide=slides[0];if(!slide)return;moveBy(dir*(slide.getBoundingClientRect().width+(parseFloat(getComputedStyle(track).gap)||12)))}
+ prev?.addEventListener('click',()=>step(-1));
+ next?.addEventListener('click',()=>step(1));
+ viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();step(e.key==='ArrowRight'?1:-1)}});
+ viewport.addEventListener('touchstart',e=>{touchStart=e.touches[0].clientX},{passive:true});
+ viewport.addEventListener('touchend',e=>{if(touchStart===null)return;const dx=e.changedTouches[0].clientX-touchStart;if(Math.abs(dx)>30)moveBy(-dx*1.2);touchStart=null},{passive:true});
+ // Only intercept vertical wheel movement while the gallery is in view and
+ // still has horizontal content in the direction of travel. Once at either
+ // end, normal page scrolling resumes immediately.
+ gallery.addEventListener('wheel',e=>{
+  if(reduced.matches||!document.getElementById('home').classList.contains('active'))return;
+  if(e.ctrlKey||e.metaKey)return;
+  const max=maxShift();if(max<=1)return;
+  const delta=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+  if(!delta)return;
+  const rect=gallery.getBoundingClientRect();
+  if(rect.top>innerHeight*.78||rect.bottom<innerHeight*.2)return;
+  if((delta>0&&offset>=max-1)||(delta<0&&offset<=1))return;
+  e.preventDefault();
+  // Normalize wheel delta modes; a trackpad remains smoothly proportional.
+  const pixels=e.deltaMode===1?delta*16:e.deltaMode===2?delta*innerHeight:delta;
+  moveBy(pixels);
+ },{passive:false});
+ window.addEventListener('resize',schedule,{passive:true});
+ render();
 })();
 </script>
 
