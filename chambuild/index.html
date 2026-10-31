@@ -630,7 +630,18 @@ p{font-size:clamp(.92rem,1vw,1.03rem);line-height:1.75;letter-spacing:0;max-widt
 #about>.page-hero .eyebrow{position:relative;z-index:1;margin-bottom:18px}
 @media(max-width:700px){#about>.page-hero{padding-top:132px!important}}
 </style>
-</head><body><header class="topbar"><div class="wrap nav"><a aria-label="CHAMBUILD Home" class="logo" href="#home"><img alt="CHAMBUILD — Your Vision, Our Commitment" class="brand-logo" src="chambuild-logo-brand.png"/></a><nav aria-label="Primary navigation" class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#standards">Standards</a><a href="#careers">Careers</a><a class="mobile-quote-link" href="#contact">Get a Quote <span>↗</span></a></nav><a class="btn nav-cta" href="#contact">Get a Quote <span>↗</span></a><button aria-controls="navlinks" aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">☰</button></div></header><main id="main">
+<style id="v46-card-interaction-css">
+/* Premium card interaction: individual 3D scroll flip, no hidden-by-default content. */
+.page .card,.page .service-card,.page .project,.page .standard,.page .contact-fact{transform-style:preserve-3d;backface-visibility:hidden;position:relative}
+@media (hover:hover) and (pointer:fine){
+ .page .card:not(.v32-value-items>div),.page .service-card{overflow:hidden;transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s,border-color .4s!important}
+ .page .card:not(.v32-value-items>div)::after,.page .service-card::after{content:"";position:absolute;inset:-40%;pointer-events:none;background:linear-gradient(115deg,transparent 36%,rgba(241,90,43,.075) 48%,transparent 60%);transform:translateX(-100%) rotate(10deg);transition:transform .9s cubic-bezier(.22,1,.36,1);z-index:0}
+ .page .card:hover::after,.page .service-card:hover::after{transform:translateX(90%) rotate(10deg)}
+ .page .card:hover,.page .service-card:hover{transform:perspective(1000px) translateY(-9px) rotateX(2deg)!important;box-shadow:0 28px 48px rgba(0,0,0,.34)!important}
+}
+@media(max-width:700px){.page .card,.page .service-card{transform-style:flat}.page .card::after,.page .service-card::after{display:none}}
+@media(prefers-reduced-motion:reduce){.page .card,.page .service-card,.page .project,.page .standard{transform:none!important;animation:none!important}}
+</style></head><body><header class="topbar"><div class="wrap nav"><a aria-label="CHAMBUILD Home" class="logo" href="#home"><img alt="CHAMBUILD — Your Vision, Our Commitment" class="brand-logo" src="chambuild-logo-brand.png"/></a><nav aria-label="Primary navigation" class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#standards">Standards</a><a href="#careers">Careers</a><a class="mobile-quote-link" href="#contact">Get a Quote <span>↗</span></a></nav><a class="btn nav-cta" href="#contact">Get a Quote <span>↗</span></a><button aria-controls="navlinks" aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">☰</button></div></header><main id="main">
 <section aria-label="Home page" class="page active" id="home"><section aria-label="Scroll-controlled CHAMBUILD film" class="film-sequence" id="filmSequence"><div class="film-sticky"><video aria-label="Architectural film controlled by scrolling" class="film-video" id="filmVideo" muted="" playsinline="" poster="chambuild-video-poster.jpg" preload="auto"><source src="chambuild-scroll-video.mp4" type="video/mp4"/></video><div class="film-shade"></div><div class="film-copy wrap"><span class="film-kicker">CHAMBUILD / THE GAMBIA</span><h1>Building with<br/><em>purpose.</em></h1><p>Construction, engineering and property improvement, thoughtfully delivered.</p><a class="btn" href="#services">Explore our services ↗</a></div></div></section>
 <section aria-label="Explore project perspectives" class="motion-gallery"><div class="wrap"><div class="motion-heading"><div><div class="eyebrow">Inspiration in motion</div><h2>Places with <em>purpose.</em></h2></div><p>Explore the spaces and disciplines shaping our approach. Images are illustrative concepts, not completed CHAMBUILD commissions.</p><div class="motion-controls"><button aria-label="Previous image" id="motionPrev" type="button">←</button><button aria-label="Next image" id="motionNext" type="button">→</button></div></div><div aria-label="Image carousel, use arrow keys" class="motion-viewport" id="motionViewport" tabindex="0"><div class="motion-track" id="motionTrack">
 <article class="motion-slide"><img alt="Contemporary residential interior" loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=1100&amp;q=80"/><div class="motion-slide-content"><span>01 / Residential</span><h3>Designed for living</h3></div></article>
@@ -747,7 +758,7 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}
        el.style.setProperty('--hero-drift',`${(-t*30).toFixed(1)}px`);
        if(!small.matches)el.style.setProperty('--hero-copy-drift',`${(-t*12).toFixed(1)}px`);
      }else if(el.classList.contains('card')){
-       if(!small.matches)el.style.setProperty('--card-float',`${(-t*5).toFixed(1)}px`);
+       // Card movement is exclusively controlled by the V47 entrance animation.
      }else{
        el.style.setProperty('--image-drift',`${(-t*(small.matches?12:24)).toFixed(1)}px`);
      }
@@ -868,4 +879,48 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}
  // If the browser restores a scrolled position, initialize after layout.
  requestAnimationFrame(()=>requestAnimationFrame(render));
 })();
-</script></body></html>
+</script>
+<script id="v47-single-card-motion">
+(()=>{
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const selector='.card,.service-card,.project,.standard,.contact-fact,.feature-copy,.feature-image,.portrait';
+  const special=el=>!!el.closest('.v37-values,.v36-education');
+  let observer=null;
+  const seen=new WeakSet();
+  const running=new WeakMap();
+  function enter(el){
+    if(seen.has(el)||special(el))return;
+    seen.add(el); // exactly one entrance per element; no delayed second animation
+    if(reduced.matches||!el.animate)return;
+    const mobile=innerWidth<=700;
+    const isCard=el.matches('.card,.service-card,.standard,.contact-fact');
+    const keyframes=isCard?[
+      {opacity:.55,transform:`perspective(1100px) translateY(${mobile?12:20}px) rotateY(${mobile?14:34}deg)`},
+      {opacity:1,transform:'perspective(1100px) translateY(0) rotateY(0deg)'}
+    ]:[
+      {opacity:.65,transform:`translateY(${mobile?10:18}px)`},
+      {opacity:1,transform:'translateY(0)'}
+    ];
+    const animation=el.animate(keyframes,{duration:mobile?480:670,delay:0,easing:'cubic-bezier(.22,1,.36,1)',fill:'none'});
+    running.set(el,animation);
+    animation.finished.catch(()=>{}).then(()=>{if(running.get(el)===animation)running.delete(el)});
+  }
+  function setup(){
+    if(observer)observer.disconnect();
+    const page=document.querySelector('.page.active');if(!page)return;
+    const elements=[...page.querySelectorAll(selector)].filter(el=>!special(el));
+    if(!('IntersectionObserver' in window)||reduced.matches){elements.forEach(el=>seen.add(el));return;}
+    observer=new IntersectionObserver(entries=>{
+      for(const entry of entries){
+        if(entry.isIntersecting){enter(entry.target);observer.unobserve(entry.target);}
+      }
+    },{threshold:.12,rootMargin:'0px 0px -20px 0px'});
+    elements.forEach(el=>{if(!seen.has(el))observer.observe(el)});
+  }
+  addEventListener('hashchange',()=>requestAnimationFrame(()=>requestAnimationFrame(setup)));
+  const projects=document.getElementById('projectGrid');
+  if(projects)new MutationObserver(()=>requestAnimationFrame(setup)).observe(projects,{childList:true});
+  requestAnimationFrame(()=>requestAnimationFrame(setup));
+})();
+</script>
+</body></html>
